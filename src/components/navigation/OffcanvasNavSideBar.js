@@ -1,52 +1,61 @@
 import { useEffect, useState } from "react";
-import { Col, Offcanvas, Row } from "react-bootstrap";
+import { Button, Col, Offcanvas, Row } from "react-bootstrap";
 
 export function OffCanvasNavSideBar(props) {
 	const { backdrop, onHide, showCanvas } = props;
 	const [iWidth, setIWidth] = useState(false);
-	useEffect(() => {
-		const handleResize = debounce(() => {
-			console.log("RESIZE");
-			if (window.innerWidth < 992) {
-				console.log("menej je");
-				setIWidth(true);
-			} else {
-				console.log("viac je");
-				setIWidth(false);
-			}
-			return () => window.removeEventListener(`resize`, handleResize.cancel());
-		}, 250);
-		window.addEventListener("resize", handleResize);
-	}, []);
+	const handleResize = debounce(() => {
+		if (window.innerWidth < 992) {
+			setIWidth(true);
+		} else {
+			setIWidth(false);
+		}
+	}, 250);
 	function debounce(func, wait, immediate) {
-		var timeout;
+		let timeout;
 		return function () {
-			var context = this,
+			let context = this,
 				args = arguments;
-			var later = function () {
+			let later = function () {
 				timeout = null;
 				if (!immediate) func.apply(context, args);
 			};
-			var callNow = immediate && !timeout;
+			let callNow = immediate && !timeout;
 			clearTimeout(timeout);
 			timeout = setTimeout(later, wait);
 			if (callNow) func.apply(context, args);
 		};
 	}
+	useEffect(() => {
+		window.addEventListener("resize", handleResize);
+		handleResize();
+		return () => window.removeEventListener(`resize`, handleResize);
+	}, [handleResize]);
+
 	return (
-		<Offcanvas placement="end" className={iWidth ? "w-100 " : "w-25"} id="OFFc" backdrop={backdrop} scroll onHide={onHide} show={showCanvas} backdropClassName="backdropHidden">
-			<Offcanvas.Header closeButton>
-				<Offcanvas.Title>Menu</Offcanvas.Title>
+		<Offcanvas placement="end" className={iWidth ? "w-100 " : "w-25 bg-light"} id="OFFc" backdrop={backdrop} scroll onHide={onHide} show={showCanvas} backdropClassName="backdropHidden">
+			<Offcanvas.Header closeButton={iWidth}>
+				<Offcanvas.Title className="text-primary">Menu</Offcanvas.Title>
 			</Offcanvas.Header>
 			<Offcanvas.Body>
 				<Row className={iWidth ? "text-center" : ""}>
-					<Col className="col-12 mb-2">Menu</Col>
-					<Col className="col-12 mb-2">Menu</Col>
-					<Col className="col-12 mb-2">Menu</Col>
-					<Col className="col-12 mb-2">Menu</Col>
-					<Col className="col-12 mb-2">Menu</Col>
+					<Col className="col-12 mb-2">
+						<Button className="col-12">O nas</Button>
+					</Col>
+					<Col className="col-12 mb-2">
+						<Button className="col-12">Vyzivove hodnoty</Button>
+					</Col>
+					<Col className="col-12 mb-2">
+						<Button className="col-12">Blog</Button>
+					</Col>
+					<Col className="col-12 mb-2">
+						<Button className="col-12">Shop</Button>
+					</Col>
+					<Col className="col-12 mb-2">
+						<Button className="col-12">Kontakt</Button>
+					</Col>
 				</Row>
-				</Offcanvas.Body>
+			</Offcanvas.Body>
 		</Offcanvas>
 	);
 }
