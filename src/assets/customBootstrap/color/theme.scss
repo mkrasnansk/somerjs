@@ -1,12 +1,13 @@
-$primary: #491866;
-$secondary: #808080;
-$danger: #b60f41;
-$dark: #0e0214;
-$success: #105f3a;
+
+$primary: #491866 !default;
+$secondary: #808080 !default;
+$danger: #b60f41 !default;
+$dark: #0e0214 !default;
+$success: #105f3a !default;
 $theme-colors: (
-	primary: $primary,
-	secondary: $secondary,
-	danger: $danger,
-	dark: $dark,
-	success: $success,
-);
+	"primary": $primary,
+	"secondary": $secondary,
+	"danger": $danger,
+	"dark": $dark,
+	"success": $success,
+) !default;
