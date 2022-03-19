@@ -1,31 +1,39 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { Button, Col, Offcanvas, Row } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
+import { changeInnerWidth, changeState } from "../../features/state/menuStatesSlice";
 
-export function OffCanvasNavSideBar(props) {
-	const { backdrop, onHide, showCanvas } = props;
-	const [iWidth, setIWidth] = useState(false);
+const debounce = (func, wait, immediate) => {
+	let timeout;
+	return function () {
+		let context = this,
+			args = arguments;
+		let later = function () {
+			timeout = null;
+			if (!immediate) func.apply(context, args);
+		};
+		let callNow = immediate && !timeout;
+		clearTimeout(timeout);
+		timeout = setTimeout(later, wait);
+		if (callNow) func.apply(context, args);
+	};
+};
+
+export function OffCanvasNavSideBar() {
+	const show = useSelector((state) => state.menuStates.show);
+	const iWidth = useSelector((state) => state.menuStates.iWidth);
+	const dispatch = useDispatch();
+	const toggleShow = () => {
+		dispatch(changeState());
+	};
 	const handleResize = debounce(() => {
 		if (window.innerWidth < 992) {
-			setIWidth(true);
+			dispatch(changeInnerWidth(true));
 		} else {
-			setIWidth(false);
+			dispatch(changeInnerWidth(false));
 		}
 	}, 250);
-	function debounce(func, wait, immediate) {
-		let timeout;
-		return function () {
-			let context = this,
-				args = arguments;
-			let later = function () {
-				timeout = null;
-				if (!immediate) func.apply(context, args);
-			};
-			let callNow = immediate && !timeout;
-			clearTimeout(timeout);
-			timeout = setTimeout(later, wait);
-			if (callNow) func.apply(context, args);
-		};
-	}
+
 	useEffect(() => {
 		window.addEventListener("resize", handleResize);
 		handleResize();
@@ -33,7 +41,16 @@ export function OffCanvasNavSideBar(props) {
 	}, [handleResize]);
 
 	return (
-		<Offcanvas placement="end" className={iWidth ? "w-100 " : "w-25 bg-light"} id="OFFc" backdrop={backdrop} scroll onHide={onHide} show={showCanvas} backdropClassName="backdropHidden">
+		<Offcanvas
+			placement="end"
+			className={iWidth ? "w-100 " : "w-25 bg-light"}
+			id="OFFc"
+			backdrop={true}
+			scroll
+			onHide={toggleShow}
+			show={show}
+			backdropClassName="backdropHidden"
+		>
 			<Offcanvas.Header closeButton={iWidth}>
 				<Offcanvas.Title className="text-primary">Menu</Offcanvas.Title>
 			</Offcanvas.Header>

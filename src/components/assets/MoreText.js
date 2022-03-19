@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import { Button, Card, Col, Container, Nav, Row } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
 import { Slide } from "react-reveal";
 import Jump from "react-reveal/Jump";
 import Pulse from "react-reveal/Pulse";
+import { decrement, increment } from "../../features/counter/counterSlice";
 let range;
 
 const smoothShow = () => {
@@ -13,10 +15,12 @@ const smoothShow = () => {
 	}
 };
 const getHeightPosition = () => {
-	range = window.pageYOffset + window.innerHeight
+	range = window.pageYOffset + window.innerHeight;
 };
 
 export default function MoreText() {
+	const count = useSelector((state) => state.counter.value);
+	const dispatch = useDispatch();
 	const [anim, setAnim] = useState(false);
 	const [tada, setTada] = useState(false);
 	useEffect(() => {
@@ -28,6 +32,9 @@ export default function MoreText() {
 		}, 500);
 	}, []);
 
+	const inrementHandle = () => {
+		dispatch(increment());
+	};
 	return (
 		<Container>
 			<Slide top cascade when={anim}>
@@ -38,6 +45,26 @@ export default function MoreText() {
 						</h1>
 					</Card.Header>
 					<Card.Body>
+						<Row className="align-items-center justify-content-around">
+							<Col className="col-auto">
+								<Button onClick={inrementHandle} className="btn-success btn-xl">
+									increment
+								</Button>
+							</Col>
+							<Col className="col-auto">
+								<Pulse spy={count}>
+									<p className="fs-1 font-weight-bold">{count}</p>
+								</Pulse>
+							</Col>
+							<Col className="col-auto">
+								<Button
+									onClick={() => dispatch(decrement())}
+									className="btn-success btn-xl"
+								>
+									decrement
+								</Button>
+							</Col>
+						</Row>
 						Welcome to the MongoDB 5.0 Manual! MongoDB is a document database designed
 						for ease of development and scaling. The Manual introduces key concepts in
 						MongoDB, presents the query language, and provides operational and
