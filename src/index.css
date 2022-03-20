@@ -1,9 +1,13 @@
-#root{
-  height: 100vh;
+body {
+	scroll-behavior: smooth;
+	overflow-x: hidden;
 }
-.slowMotion{
-  transition: .5s ease;
+#root {
+	height: 100vh;
 }
-.backdropHidden{
-  opacity: 0.001 !important;
+.slowMotion {
+	transition: 0.5s ease;
+}
+.backdropHidden {
+	opacity: 0.001 !important;
 }

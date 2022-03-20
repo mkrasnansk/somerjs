@@ -26,7 +26,7 @@ export default function MoreText() {
 	useEffect(() => {
 		// smoothShow();
 		getHeightPosition();
-		console.log(document.getElementsByClassName("card"));
+		// console.log(document.getElementsByClassName("card"));
 		setTimeout(() => {
 			setAnim(true);
 		}, 500);

@@ -1,10 +1,18 @@
-.circle{
-    width: 30rem;
-    height: 30rem;
-    right: -24rem;
-    top: 20vh;
-    border-radius: 15rem;
-    background-color: aquamarine;
-    position: absolute;
-    opacity: .4;
+.circle {
+	width: 5rem;
+	height: 5rem;
+	right: -2rem;
+	border-radius: 15rem;
+	position: absolute;
+	opacity: 0.4;
+	cursor: pointer;
+	transition: 0.2s ease-in-out;
+	&:hover {
+		transition: 0.3s ease-in-out;
+		opacity: 1;
+		box-shadow: 0 0 10px #491866;
+	}
+}
+.size {
+	font-size: 3rem;
 }

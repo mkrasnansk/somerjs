@@ -13,7 +13,6 @@ export const menuStates = createSlice({
 			state.show = !state.show;
 		},
 		changeInnerWidth: (state, action) => {
-            console.log(action);
 			state.iWidth = action.payload;
 		},
 	},
