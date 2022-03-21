@@ -5,14 +5,24 @@ import { Slide } from "react-reveal";
 import Jump from "react-reveal/Jump";
 import Pulse from "react-reveal/Pulse";
 import { decrement, increment } from "../../features/counter/counterSlice";
+import { changeAnim } from "../../features/state/menuStatesSlice";
+import { HelpCardText } from "./HelpCardText";
 let range;
 
 const smoothShow = () => {
 	let cards = document.getElementsByClassName("card");
 	for (const card of cards) {
-		console.log(card);
-		console.log(card.offsetTop);
+		if (card.offsetTop < range) {
+			console.log(card);
+			console.log(card.offsetTop);
+		}
 	}
+};
+const sumRange = () => {
+	range = window.innerHeight + window.scrollY;
+};
+const scrollListener = () => {
+	window.addEventListener("scroll", sumRange);
 };
 const getHeightPosition = () => {
 	range = window.pageYOffset + window.innerHeight;
@@ -20,16 +30,18 @@ const getHeightPosition = () => {
 
 export default function MoreText() {
 	const count = useSelector((state) => state.counter.value);
+	const anim = useSelector((state) => state.menuStates.anim);
 	const dispatch = useDispatch();
-	const [anim, setAnim] = useState(false);
 	const [tada, setTada] = useState(false);
+
 	useEffect(() => {
-		// smoothShow();
+		scrollListener();
 		getHeightPosition();
+		smoothShow();
 		// console.log(document.getElementsByClassName("card"));
-		setTimeout(() => {
-			setAnim(true);
-		}, 500);
+		return () => {
+			window.removeEventListener("scroll", sumRange);
+		};
 	}, []);
 
 	const inrementHandle = () => {
@@ -210,35 +222,11 @@ export default function MoreText() {
 					</Col>
 				</Row>
 			</Slide>
-			<Slide bottom opposite cascade when={anim}>
-				<Card>
-					<Card.Body>
-						<p>
-							Sharding distributes data across a cluster of machines. Starting in 3.4,
-							MongoDB supports creating zones of data based on the shard key. In a
-							balanced cluster, MongoDB directs reads and writes covered by a zone
-							only to those shards inside the zone. See the Zones manual page for more
-							information. Support for Multiple Storage Engines MongoDB supports
-							multiple storage engines:
-						</p>
-						<p>
-							WiredTiger Storage Engine (including support for Encryption at Rest)
-							In-Memory Storage Engine. In addition, MongoDB provides pluggable
-							storage engine API that allows third parties to develop storage engines
-							for MongoDB.
-						</p>
-						<p>
-							<span className="badge bg-secondary  p-2">
-								← What is MongoDB? Getting Started →{" "}
-							</span>
-							<Nav.Link className="d-inline btn-link">On this page</Nav.Link>
-						</p>
-					</Card.Body>
-					<Card.Footer>
-						<p>Document Database</p>
-					</Card.Footer>
-				</Card>
-			</Slide>
+			<HelpCardText />
+			<HelpCardText />
+			<HelpCardText />
+			<HelpCardText />
+			<HelpCardText />
 		</Container>
 	);
 }
