@@ -2,7 +2,8 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
 	show: false,
-	iWidth: false,
+	iWidth: window.innerWidth < 992 ? true : false,
+	anim: false,
 };
 
 export const menuStates = createSlice({
@@ -15,10 +16,13 @@ export const menuStates = createSlice({
 		changeInnerWidth: (state, action) => {
 			state.iWidth = action.payload;
 		},
+		changeAnim: (state, action) => {
+			state.anim = action.payload;
+		},
 	},
 });
 
 // Action creators are generated for each case reducer function
-export const { changeState, changeInnerWidth } = menuStates.actions;
+export const { changeState, changeInnerWidth, changeAnim } = menuStates.actions;
 
 export default menuStates.reducer;

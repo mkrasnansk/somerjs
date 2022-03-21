@@ -1,29 +1,17 @@
 import { useEffect, useState } from "react";
 import { Button, Col, Offcanvas, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { changeInnerWidth, changeState } from "../../features/state/menuStatesSlice";
+import { changeAnim, changeInnerWidth, changeState } from "../../features/state/menuStatesSlice";
 import "../assets/scss/circle.scss";
 import { BiMenu } from "react-icons/bi";
 import { Bubble } from "../other/Bubble";
-
-const debounce = (func, wait, immediate) => {
-	let timeout;
-	return function () {
-		let context = this,
-			args = arguments;
-		let later = function () {
-			timeout = null;
-			if (!immediate) func.apply(context, args);
-		};
-		let callNow = immediate && !timeout;
-		clearTimeout(timeout);
-		timeout = setTimeout(later, wait);
-		if (callNow) func.apply(context, args);
-	};
-};
+import { Link } from "react-router-dom";
+import { debounce } from "../assets/helpers/debounce";
 
 export function OffCanvasNavSideBar() {
-	const [circlePosition, setCirclePosition] = useState(0);
+	const [circlePosition, setCirclePosition] = useState(
+		Math.floor(window.pageYOffset + window.innerHeight / 1.2),
+	);
 	const [bubble, setBubble] = useState(false);
 	const show = useSelector((state) => state.menuStates.show);
 	const iWidth = useSelector((state) => state.menuStates.iWidth);
@@ -55,6 +43,11 @@ export function OffCanvasNavSideBar() {
 			}
 		};
 	}, [handleResize, handlePosition, show]);
+
+	const backTOLayout = () => {
+		dispatch(changeAnim(false));
+		dispatch(changeState());
+	};
 
 	const circleElement = () => {
 		return (
@@ -93,19 +86,21 @@ export function OffCanvasNavSideBar() {
 					<Offcanvas.Body>
 						<Row className={iWidth ? "text-center" : ""}>
 							<Col className="col-12 mb-2">
-								<Button className="col-12">O nas</Button>
+								<Link to="/">
+									<Button onClick={backTOLayout} className="col-12">
+										Home
+									</Button>
+								</Link>
 							</Col>
 							<Col className="col-12 mb-2">
-								<Button className="col-12">Vyzivove hodnoty</Button>
+								<Link to="/about">
+									<Button className="col-12">About</Button>
+								</Link>
 							</Col>
 							<Col className="col-12 mb-2">
-								<Button className="col-12">Blog</Button>
-							</Col>
-							<Col className="col-12 mb-2">
-								<Button className="col-12">Shop</Button>
-							</Col>
-							<Col className="col-12 mb-2">
-								<Button className="col-12">Kontakt</Button>
+								<Link to="/users">
+									<Button className="col-12">Users</Button>
+								</Link>
 							</Col>
 						</Row>
 					</Offcanvas.Body>

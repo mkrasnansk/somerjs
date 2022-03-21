@@ -9,7 +9,7 @@ function createBubble() {
 	createElement.style.animation = "animation 3s linear infinite";
 	createElement.style.width = 15 + size + "px";
 	createElement.style.height = 15 + size + "px";
-	createElement.style.left = Math.random() * 50 + "px";
+	createElement.style.right = Math.random() * 40 + "px";
 	createElement.style.boxShadow = `inset 0 0 6px #${Math.floor(Math.random()*1000).toString(16)}`;
 	section.appendChild(createElement);
 
@@ -22,7 +22,7 @@ export const Bubble = (props) => {
     console.log(Math.floor(Math.random()*1000).toString(16));
 	useEffect(() => {
 		createBubble();
-		let intervalBubble = setInterval(createBubble, 50);
+		let intervalBubble = setInterval(createBubble, 100);
 		return () => {
 			clearInterval(intervalBubble);
 		};
