@@ -1,23 +1,15 @@
 import { useEffect, useState } from "react";
-import { Button, Card, Col, Container, Nav, Row } from "react-bootstrap";
+import { Button, Card, Col, Container, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { Slide } from "react-reveal";
+import { Flip } from "react-reveal";
 import Jump from "react-reveal/Jump";
 import Pulse from "react-reveal/Pulse";
 import { decrement, increment } from "../../features/counter/counterSlice";
 import { changeAnim } from "../../features/state/menuStatesSlice";
 import { HelpCardText } from "./HelpCardText";
+import { debounce } from "./helpers/debounce";
 let range;
 
-const smoothShow = () => {
-	let cards = document.getElementsByClassName("card");
-	for (const card of cards) {
-		if (card.offsetTop < range) {
-			console.log(card);
-			console.log(card.offsetTop);
-		}
-	}
-};
 const sumRange = () => {
 	range = window.innerHeight + window.scrollY;
 };
@@ -33,12 +25,19 @@ export default function MoreText() {
 	const anim = useSelector((state) => state.menuStates.anim);
 	const dispatch = useDispatch();
 	const [tada, setTada] = useState(false);
-
+	
+	const leaveToPage = () => {
+		dispatch(changeAnim(false));
+	};
+	const enterToPage = debounce(() => {
+		dispatch(changeAnim(true));
+	}, 500);
+	
 	useEffect(() => {
+		leaveToPage();
 		scrollListener();
 		getHeightPosition();
-		smoothShow();
-		// console.log(document.getElementsByClassName("card"));
+		enterToPage();
 		return () => {
 			window.removeEventListener("scroll", sumRange);
 		};
@@ -49,7 +48,7 @@ export default function MoreText() {
 	};
 	return (
 		<Container>
-			<Slide top cascade when={anim}>
+			<Flip top delay={100} cascade when={anim}>
 				<Card className="mb-3">
 					<Card.Header>
 						<h1>
@@ -84,10 +83,10 @@ export default function MoreText() {
 						reference section.
 					</Card.Body>
 				</Card>
-			</Slide>
+			</Flip>
 			<Row className=" row-cols-1 row-cols-xl-2 g-3 mb-3">
 				<Col>
-					<Slide className="h-100" left opposite cascade when={anim}>
+					<Flip delay={100} className="h-100" left cascade when={anim}>
 						<div className="h-100">
 							<Card className="h-100">
 								<Card.Body>
@@ -125,10 +124,10 @@ export default function MoreText() {
 								</Card.Body>
 							</Card>
 						</div>
-					</Slide>
+					</Flip>
 				</Col>
 				<Col>
-					<Slide className="h-100" right opposite cascade when={anim}>
+					<Flip delay={100} className="h-100" right cascade when={anim}>
 						<div className="h-100">
 							<Card className="h-100">
 								<Card.Body>
@@ -157,10 +156,10 @@ export default function MoreText() {
 								</Card.Body>
 							</Card>
 						</div>
-					</Slide>
+					</Flip>
 				</Col>
 			</Row>
-			<Slide bottom opposite cascade when={anim}>
+			<Flip bottom delay={100} cascade when={anim}>
 				<Row className=" row-cols-1 row-cols-xl-3 g-3 mb-3">
 					<Col>
 						<Card className="h-100">
@@ -221,7 +220,7 @@ export default function MoreText() {
 						</Card>
 					</Col>
 				</Row>
-			</Slide>
+			</Flip>
 			<HelpCardText />
 			<HelpCardText />
 			<HelpCardText />

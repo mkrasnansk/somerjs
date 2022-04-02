@@ -1,13 +1,13 @@
 import React from "react";
 import { Card, Nav } from "react-bootstrap";
 import { useSelector } from "react-redux";
-import { Slide } from "react-reveal";
+import { Flip  } from "react-reveal";
 
 export const HelpCardText = () => {
 	const anim = useSelector((state) => state.menuStates.anim);
     
 	return (
-		<Slide bottom opposite cascade when={anim}>
+		<Flip  bottom delay={100}  cascade when={anim}>
 			<Card>
 				<Card.Body>
 					<p>
@@ -34,6 +34,6 @@ export const HelpCardText = () => {
 					<p>Document Database</p>
 				</Card.Footer>
 			</Card>
-		</Slide>
+		</Flip>
 	);
 };

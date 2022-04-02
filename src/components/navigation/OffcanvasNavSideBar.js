@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import { Button, Col, Offcanvas, Row } from "react-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
-import { changeAnim, changeInnerWidth, changeState } from "../../features/state/menuStatesSlice";
-import "../assets/scss/circle.scss";
 import { BiMenu } from "react-icons/bi";
-import { Bubble } from "../other/Bubble";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { changeInnerWidth, changeState } from "../../features/state/menuStatesSlice";
 import { debounce } from "../assets/helpers/debounce";
+import "../assets/scss/circle.scss";
+import { Bubble } from "../other/Bubble";
 
 export function OffCanvasNavSideBar() {
 	const [circlePosition, setCirclePosition] = useState(
@@ -43,12 +43,6 @@ export function OffCanvasNavSideBar() {
 			}
 		};
 	}, [handleResize, handlePosition, show]);
-
-	const backTOLayout = () => {
-		dispatch(changeAnim(false));
-		dispatch(changeState());
-	};
-
 	const circleElement = () => {
 		return (
 			<Col>
@@ -87,19 +81,19 @@ export function OffCanvasNavSideBar() {
 						<Row className={iWidth ? "text-center" : ""}>
 							<Col className="col-12 mb-2">
 								<Link to="/">
-									<Button onClick={backTOLayout} className="col-12">
+									<Button className="col-12">
 										Home
 									</Button>
 								</Link>
 							</Col>
 							<Col className="col-12 mb-2">
 								<Link to="/about">
-									<Button className="col-12">About</Button>
+									<Button   className="col-12">About</Button>
 								</Link>
 							</Col>
 							<Col className="col-12 mb-2">
 								<Link to="/users">
-									<Button className="col-12">Users</Button>
+									<Button   className="col-12">Users</Button>
 								</Link>
 							</Col>
 						</Row>

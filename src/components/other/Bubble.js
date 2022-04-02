@@ -19,7 +19,6 @@ function createBubble() {
 }
 
 export const Bubble = (props) => {
-    console.log(Math.floor(Math.random()*1000).toString(16));
 	useEffect(() => {
 		createBubble();
 		let intervalBubble = setInterval(createBubble, 100);
@@ -27,9 +26,6 @@ export const Bubble = (props) => {
 			clearInterval(intervalBubble);
 		};
 	}, [props.start]);
-
-	console.log(props.positionStart);
-
 	let position = props.positionStart - 300;
 	return <section  style={{ top: position }}></section>;
 };
