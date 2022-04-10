@@ -1,8 +1,8 @@
 import { MDBBtn } from "mdb-react-ui-kit";
-import React from "react";
 import { Col, Row } from "react-bootstrap";
 import { Slovakia } from "../assets/images/svg/slovakia";
 import "../assets/scss/mapsStyle.scss";
+
 export const MapComponent = () => {
 	const removeAnimation = () => {
 		for (let i of document.getElementById("svkMap").children) {
@@ -10,50 +10,61 @@ export const MapComponent = () => {
 			i.style.zIndex = "-1";
 		}
 	};
+	const addAnimation = (map, animProps, id, id2 = null) => {
+		removeAnimation();
+		let elementId = document.getElementById(id);
+		map.append(elementId);
+		if (id2 !== null) {
+			let elementId2 = document.getElementById(id2);
+			map.append(elementId2);
+			if (id2 !== "BA") {
+				elementId2.style.WebkitAnimation = animProps;
+			}
+		}
+		elementId.style.WebkitAnimation = animProps;
+	};
 	const handleClickPosition = (e) => {
-		let map = document.getElementById("svkMap");
+		const map = document.getElementById("svkMap");
+		let id;
+		let id2;
+		const animPropsCircle = "newAnimCircle 2s infinite";
+		const animPropsPath = "newAnimPath 2s infinite";
+		e.target.addEventListener("blur",(e)=>{
+			removeAnimation()
+			e.target.removeEventListener("blur",()=>{})
+			
+		})
 		switch (e.target.id) {
 			case "BL":
-				removeAnimation();
-				map.append(document.getElementById("BA"));
-				document.getElementById("BA").style.WebkitAnimation = "newAnimCircle 2s infinite";
+				id = "BA";
+				addAnimation(map, animPropsCircle, id);
 				break;
 			case "BAKraj":
-				removeAnimation();
-				map.append(document.getElementById("SK-BL"));
-				map.append(document.getElementById("BA"));
-				document.getElementById("SK-BL").style.WebkitAnimation = "newAnimPath 2s infinite";
+				id = "SK-BL";
+				id2 = "BA";
+				addAnimation(map, animPropsPath, id, id2);
 				break;
 			case "TT":
-				removeAnimation();
-				map.append(document.getElementById("SK-TA"));
-				document.getElementById("SK-TA").style.WebkitAnimation = "newAnimPath 2s infinite";
+				id = "SK-TA";
+				addAnimation(map, animPropsPath, id);
 				break;
 			case "NRaTN":
-				removeAnimation();
-
-				map.append(document.getElementById("SK-TC"));
-				map.append(document.getElementById("SK-NI"));
-				document.getElementById("SK-TC").style.WebkitAnimation = "newAnimPath 2s infinite";
-				document.getElementById("SK-NI").style.WebkitAnimation = "newAnimPath 2s infinite";
+				id = "SK-NI";
+				id2 = "SK-TC";
+				addAnimation(map, animPropsPath, id, id2);
 				break;
 			case "ZAaBB":
-				removeAnimation();
-
-				map.append(document.getElementById("SK-ZI"));
-				map.append(document.getElementById("SK-BC"));
-				document.getElementById("SK-ZI").style.WebkitAnimation = "newAnimPath 2s infinite";
-				document.getElementById("SK-BC").style.WebkitAnimation = "newAnimPath 2s infinite";
+				id = "SK-BC";
+				id2 = "SK-ZI";
+				addAnimation(map, animPropsPath, id, id2);
 				break;
 			case "KE":
-				removeAnimation();
-				map.append(document.getElementById("SK-KI"));
-				document.getElementById("SK-KI").style.WebkitAnimation = "newAnimPath 2s infinite";
+				id = "SK-KI";
+				addAnimation(map, animPropsPath, id);
 				break;
 			case "PO":
-				removeAnimation();
-				map.append(document.getElementById("SK-PV"));
-				document.getElementById("SK-PV").style.WebkitAnimation = "newAnimPath 2s infinite";
+				id = "SK-PV";
+				addAnimation(map, animPropsPath, id);
 				break;
 			default:
 				removeAnimation();

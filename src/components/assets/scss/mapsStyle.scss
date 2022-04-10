@@ -55,15 +55,12 @@ svg {
 
 @keyframes newAnimPath {
 	from {
-		stroke: rgb(150, 150, 150);
-		stroke-width: 1px;
+		-webkit-filter:drop-shadow( 0 0 0px black)
 	}
 	50% {
-		stroke: rgb(28, 6, 68);
-		stroke-width: 2px;
+		-webkit-filter:drop-shadow( 0 0 3px black)
 	}
 	to {
-		stroke: rgb(150, 150, 150);
-		stroke-width: 1px;
+		-webkit-filter:drop-shadow( 0 0 0px black)
 	}
 }
