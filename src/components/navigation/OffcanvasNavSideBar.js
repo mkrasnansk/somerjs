@@ -55,7 +55,7 @@ export function OffCanvasNavSideBar() {
 					style={{ top: circlePosition }}
 				>
 					<div className="d-flex h-100 justify-content-center align-items-center">
-						<BiMenu className="size text-white" />
+						<BiMenu color="white" className="size " />
 					</div>
 				</div>
 			</Col>

@@ -1,8 +1,8 @@
 .circle {
-	width: 5rem;
-	height: 5rem;
-	right: -2rem;
-	border-radius: 15rem;
+	width: 3rem;
+	height: 3rem;
+	right: 0.1rem;
+	border-radius: .3rem;
 	position: absolute;
 	opacity: 0.4;
 	cursor: pointer;
@@ -14,5 +14,10 @@
 	}
 }
 .size {
-	font-size: 3rem;
+	font-size: 2rem;
+	path{
+		&:hover{
+		fill: white !important;
+	}
+	}
 }

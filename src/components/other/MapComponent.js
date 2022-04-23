@@ -8,7 +8,12 @@ export const MapComponent = () => {
 		for (let i of document.getElementById("svkMap").children) {
 			i.style.WebkitAnimation = null;
 			i.style.zIndex = "-1";
+			if (i.hasAttribute("hidden")) {
+				i.removeAttribute("hidden")
+			}
 		}
+		document.getElementById("TNNR").setAttribute("hidden", "true");
+		document.getElementById("ZABB").setAttribute("hidden", "true");
 	};
 	const addAnimation = (map, animProps, id, id2 = null) => {
 		removeAnimation();
@@ -16,12 +21,28 @@ export const MapComponent = () => {
 		map.append(elementId);
 		if (id2 !== null) {
 			let elementId2 = document.getElementById(id2);
-			map.append(elementId2);
 			if (id2 !== "BA") {
-				elementId2.style.WebkitAnimation = animProps;
+				elementId2.setAttribute("hidden", "true");
+				elementId.setAttribute("hidden", "true");
+			}
+			if (id2 === "SK-TC") {
+				document.getElementById("TNNR").removeAttribute("hidden");
+				document.getElementById("TNNR").style.WebkitAnimation = animProps;
+				map.append(document.getElementById("TNNR"))
+			} else if (id2 === "SK-ZI") {
+				document.getElementById("ZABB").removeAttribute("hidden");
+				document.getElementById("ZABB").style.WebkitAnimation = animProps;
+				map.append(document.getElementById("ZABB"))
+			} else {
+					map.append(elementId2);
+					if (id2 !== "BA") {
+					elementId2.style.WebkitAnimation = animProps;
+				}
 			}
 		}
-		elementId.style.WebkitAnimation = animProps;
+		if (id2 == null || id2 === "BA") {
+			elementId.style.WebkitAnimation = animProps;
+		}
 	};
 	const handleClickPosition = (e) => {
 		const map = document.getElementById("svkMap");
@@ -29,11 +50,10 @@ export const MapComponent = () => {
 		let id2;
 		const animPropsCircle = "newAnimCircle 2s infinite";
 		const animPropsPath = "newAnimPath 2s infinite";
-		e.target.addEventListener("blur",(e)=>{
-			removeAnimation()
-			e.target.removeEventListener("blur",()=>{})
-			
-		})
+		e.target.addEventListener("blur", (e) => {
+			removeAnimation();
+			e.target.removeEventListener("blur", () => {});
+		});
 		switch (e.target.id) {
 			case "BL":
 				id = "BA";

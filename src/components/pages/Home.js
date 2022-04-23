@@ -4,9 +4,10 @@ import { MapComponent } from "../other/MapComponent";
 export const Home = () => {
 	return (
 		<Container>
-			<Row >
-				<Col>Mapa Oblasti
-				<MapComponent/>
+			<Row>
+				<Col>
+					Mapa Oblasti
+					<MapComponent />
 				</Col>
 				<Col>Zariadenia a Web </Col>
 			</Row>
