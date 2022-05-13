@@ -25,15 +25,15 @@
 #SK-PV {
 	fill: rgb(224, 216, 236);
 }
-svg {
-	path,
-	circle {
-		&:hover {
-			fill: rgb(0, 0, 0) !important;
-			transition: 0.3s;
-			cursor: pointer;
+.SvgStyles {
+		path,
+		circle {
+			&:hover {
+				fill: rgb(0, 0, 0) !important;
+				transition: 0.3s;
+				cursor: pointer;
+			}
 		}
-	}
 }
 .legendPoint {
 	width: 50px;
@@ -55,12 +55,12 @@ svg {
 
 @keyframes newAnimPath {
 	from {
-		-webkit-filter:drop-shadow( 0 0 0px black)
+		-webkit-filter: drop-shadow(0 0 0px black);
 	}
 	50% {
-		-webkit-filter:drop-shadow( 0 0 3px black)
+		-webkit-filter: drop-shadow(0 0 3px black);
 	}
 	to {
-		-webkit-filter:drop-shadow( 0 0 0px black)
+		-webkit-filter: drop-shadow(0 0 0px black);
 	}
 }

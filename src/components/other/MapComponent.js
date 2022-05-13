@@ -9,7 +9,7 @@ export const MapComponent = () => {
 			i.style.WebkitAnimation = null;
 			i.style.zIndex = "-1";
 			if (i.hasAttribute("hidden")) {
-				i.removeAttribute("hidden")
+				i.removeAttribute("hidden");
 			}
 		}
 		document.getElementById("TNNR").setAttribute("hidden", "true");
@@ -28,14 +28,14 @@ export const MapComponent = () => {
 			if (id2 === "SK-TC") {
 				document.getElementById("TNNR").removeAttribute("hidden");
 				document.getElementById("TNNR").style.WebkitAnimation = animProps;
-				map.append(document.getElementById("TNNR"))
+				map.append(document.getElementById("TNNR"));
 			} else if (id2 === "SK-ZI") {
 				document.getElementById("ZABB").removeAttribute("hidden");
 				document.getElementById("ZABB").style.WebkitAnimation = animProps;
-				map.append(document.getElementById("ZABB"))
+				map.append(document.getElementById("ZABB"));
 			} else {
-					map.append(elementId2);
-					if (id2 !== "BA") {
+				map.append(elementId2);
+				if (id2 !== "BA") {
 					elementId2.style.WebkitAnimation = animProps;
 				}
 			}
@@ -93,79 +93,72 @@ export const MapComponent = () => {
 	};
 	return (
 		<div>
-			<Row>
-				<Col className="col-auto">
-					<MDBBtn
-						floating
-						size="sm"
-						onClick={handleClickPosition}
-						style={{ background: "#990a2e" }}
-						id="BL"
+			<div className="d-flex justify-content-center">
+				<MDBBtn
+					floating
+					size="sm"
+					onClick={handleClickPosition}
+					style={{ background: "#990a2e" }}
+					id="BL"
+					className="border-0"
+				></MDBBtn>
+				<MDBBtn
+					floating
+					size="sm"
+					onClick={handleClickPosition}
+					id="BAKraj"
+					style={{ background: "#533788" }}
+					className="border-0"
 					></MDBBtn>
-				</Col>
-				<Col className="col-auto">
-					<MDBBtn
-						floating
-						size="sm"
-						onClick={handleClickPosition}
-						id="BAKraj"
-						style={{ background: "#533788" }}
+				<MDBBtn
+					floating
+					size="sm"
+					onClick={handleClickPosition}
+					id="TT"
+					style={{ background: "#846ab6" }}
+					className="border-0"
 					></MDBBtn>
-				</Col>
-				<Col className="col-auto">
-					<MDBBtn
-						floating
-						size="sm"
-						onClick={handleClickPosition}
-						id="TT"
-						style={{ background: "#846ab6" }}
+				<MDBBtn
+					floating
+					size="sm"
+					onClick={handleClickPosition}
+					id="NRaTN"
+					style={{ background: "#9b8db6" }}
+					className="border-0"
 					></MDBBtn>
-				</Col>
-				<Col className="col-auto">
-					<MDBBtn
-						floating
-						size="sm"
-						onClick={handleClickPosition}
-						id="NRaTN"
-						style={{ background: "#9b8db6" }}
+				<MDBBtn
+					floating
+					size="sm"
+					onClick={handleClickPosition}
+					id="ZAaBB"
+					style={{ background: "#bbaed3" }}
+					className="border-0"
 					></MDBBtn>
-				</Col>
-				<Col className="col-auto">
-					<MDBBtn
-						floating
-						size="sm"
-						onClick={handleClickPosition}
-						id="ZAaBB"
-						style={{ background: "#bbaed3" }}
+				<MDBBtn
+					floating
+					size="sm"
+					onClick={handleClickPosition}
+					id="KE"
+					style={{ background: "#d4c9e9" }}
+					className="border-0"
 					></MDBBtn>
-				</Col>
-				<Col className="col-auto">
-					<MDBBtn
-						floating
-						size="sm"
-						onClick={handleClickPosition}
-						id="KE"
-						style={{ background: "#d4c9e9" }}
+				<MDBBtn
+					floating
+					size="sm"
+					onClick={handleClickPosition}
+					id="PO"
+					style={{ background: "#e0d8ec" }}
+					className="border-0"
 					></MDBBtn>
-				</Col>
-				<Col className="col-auto">
-					<MDBBtn
-						floating
-						size="sm"
-						onClick={handleClickPosition}
-						id="PO"
-						style={{ background: "#e0d8ec" }}
-					></MDBBtn>
-				</Col>
-			</Row>
-			<Row>
+			</div>
+			<Row className="justify-content-center">
 				<Col className="col-auto">
 					<div className="text-danger">My position</div>
 				</Col>
 				<Col style={{ color: "#533788" }} className="col-auto">
 					{" > > > "}
 				</Col>
-				<Col>
+				<Col className="col-auto">
 					<div style={{ color: "#e0d8ec" }}>willing to work</div>
 				</Col>
 			</Row>
