@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.css": "/someRjs/static/css/main.b09c6321.css",
-    "main.js": "/someRjs/static/js/main.885a28ec.js",
-    "index.html": "/someRjs/index.html",
-    "main.b09c6321.css.map": "/someRjs/static/css/main.b09c6321.css.map",
-    "main.885a28ec.js.map": "/someRjs/static/js/main.885a28ec.js.map"
+    "main.css": "/somerjs/static/css/main.b09c6321.css",
+    "main.js": "/somerjs/static/js/main.885a28ec.js",
+    "index.html": "/somerjs/index.html",
+    "main.b09c6321.css.map": "/somerjs/static/css/main.b09c6321.css.map",
+    "main.885a28ec.js.map": "/somerjs/static/js/main.885a28ec.js.map"
   },
   "entrypoints": [
     "static/css/main.b09c6321.css",
